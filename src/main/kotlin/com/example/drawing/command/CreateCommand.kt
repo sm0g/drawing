@@ -13,7 +13,7 @@ class CreateCommand(args: List<String>) : ICommand {
 
     val doubleBorderWidth = 2
     width = args.first().toPositiveIntParam() + doubleBorderWidth
-    height = args.last().toPositiveIntParam()+ doubleBorderWidth
+    height = args.last().toPositiveIntParam() + doubleBorderWidth
   }
 
   override fun execute(): Canvas {
