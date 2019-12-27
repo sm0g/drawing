@@ -3,9 +3,9 @@ package com.example.drawing.command
 import com.example.drawing.domain.Canvas.Companion.EMPTY_SYMBOL
 import com.example.drawing.domain.Canvas.Companion.HORIZONTAL_SYMBOL
 import com.example.drawing.domain.Canvas.Companion.VERTICAL_SYMBOL
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 
 internal class CreateCommandTest {
   @Test
@@ -19,6 +19,16 @@ internal class CreateCommandTest {
   fun invalidArgsSizeTest() {
     assertThrows(IllegalArgumentException::class.java) {
       CreateCommand(listOf("2"))
+    }
+  }
+
+  @Test
+  fun invalidArgsTest() {
+    assertThrows(IllegalArgumentException::class.java) {
+      CreateCommand(listOf("-1", "1"))
+    }
+    assertThrows(IllegalArgumentException::class.java) {
+      CreateCommand(listOf("1", "sf"))
     }
   }
 
