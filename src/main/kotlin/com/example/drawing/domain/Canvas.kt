@@ -17,15 +17,23 @@ class Canvas(val width: Int, val height: Int) {
     }
   }
 
+  fun getNode(x: Int, y: Int): Char {
+    return nodes[x][y]
+  }
+
+  fun setNode(x: Int, y: Int, symbol: Char) {
+    nodes[x][y] = symbol
+  }
+
   override fun toString(): String {
     val toRet = StringBuilder()
 
-    for (i in 0 until height) {
-      for (j in 0 until width) {
-        toRet.append(nodes[j][i])
+    for (y in 0 until height) {
+      for (x in 0 until width) {
+        toRet.append(getNode(x, y))
       }
 
-      if(i != height - 1) {
+      if(y != height - 1) {
         toRet.appendln()
       }
     }

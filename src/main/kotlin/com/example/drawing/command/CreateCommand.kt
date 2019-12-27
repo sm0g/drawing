@@ -1,6 +1,9 @@
 package com.example.drawing.command
 
 import com.example.drawing.domain.Canvas
+import com.example.drawing.domain.Canvas.Companion.EMPTY_SYMBOL
+import com.example.drawing.domain.Canvas.Companion.HORIZONTAL_SYMBOL
+import com.example.drawing.domain.Canvas.Companion.VERTICAL_SYMBOL
 import com.example.drawing.utils.toPositiveIntParam
 
 class CreateCommand(args: List<String>) : ICommand {
@@ -19,16 +22,16 @@ class CreateCommand(args: List<String>) : ICommand {
   override fun execute(): Canvas {
     val canvas = Canvas(width, height)
 
-    for (i in 0 until height) {
-      for (j in 0 until width) {
-        if(i == 0 || i == height - 1) {
-          canvas.nodes[j][i] = Canvas.HORIZONTAL_SYMBOL
+    for (y in 0 until height) {
+      for (x in 0 until width) {
+        if(y == 0 || y == height - 1) {
+          canvas.setNode(x, y, HORIZONTAL_SYMBOL)
         }
-        else if(j == 0 || j == width - 1) {
-          canvas.nodes[j][i] = Canvas.VERTICAL_SYMBOL
+        else if(x == 0 || x == width - 1) {
+          canvas.setNode(x, y, VERTICAL_SYMBOL)
         }
         else {
-          canvas.nodes[j][i] = Canvas.EMPTY_SYMBOL
+          canvas.setNode(x, y, EMPTY_SYMBOL)
         }
       }
     }
