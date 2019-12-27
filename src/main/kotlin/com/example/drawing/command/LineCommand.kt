@@ -1,7 +1,6 @@
 package com.example.drawing.command
 
 import com.example.drawing.domain.Canvas
-import com.example.drawing.domain.Canvas.Companion.LINE_CHAR
 import com.example.drawing.domain.Point
 import com.example.drawing.utils.toPositiveIntParam
 
@@ -42,7 +41,7 @@ class LineCommand(args: List<String>, private val canvas: Canvas) : ICommand {
 
   private fun drawHorizontalLine(): Canvas {
     for(y in start.y .. end.y) {
-      canvas.setNode(start.x, y, LINE_CHAR)
+      canvas.setLineChar(start.x, y)
     }
 
     return canvas
@@ -50,7 +49,7 @@ class LineCommand(args: List<String>, private val canvas: Canvas) : ICommand {
 
   private fun drawVerticalLine(): Canvas {
     for(x in start.x .. end.x) {
-      canvas.setNode(x, start.y, LINE_CHAR)
+      canvas.setLineChar(x, start.y)
     }
 
     return canvas

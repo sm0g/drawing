@@ -2,6 +2,7 @@ package com.example.drawing.domain
 
 import com.example.drawing.domain.Canvas.Companion.EMPTY_CHAR
 import com.example.drawing.domain.Canvas.Companion.HORIZONTAL_CHAR
+import com.example.drawing.domain.Canvas.Companion.LINE_CHAR
 import com.example.drawing.domain.Canvas.Companion.VERTICAL_CHAR
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -63,5 +64,37 @@ class CanvasTest {
     canvas.setNode(1, 1, VERTICAL_CHAR)
 
     assertEquals(VERTICAL_CHAR, canvas.getNode(1, 1))
+  }
+
+  @Test
+  fun setVerticalCharTest() {
+    val canvas = Canvas(2, 2)
+    canvas.setVerticalChar(1, 1)
+
+    assertEquals(VERTICAL_CHAR, canvas.getNode(1, 1))
+  }
+
+  @Test
+  fun setHorizontalCharTest() {
+    val canvas = Canvas(2, 2)
+    canvas.setHorizontalChar(1, 1)
+
+    assertEquals(HORIZONTAL_CHAR, canvas.getNode(1, 1))
+  }
+
+  @Test
+  fun setEmptyCharTest() {
+    val canvas = Canvas(2, 2)
+    canvas.setEmptyChar(1, 1)
+
+    assertEquals(EMPTY_CHAR, canvas.getNode(1, 1))
+  }
+
+  @Test
+  fun setLineCharTest() {
+    val canvas = Canvas(2, 2)
+    canvas.setLineChar(1, 1)
+
+    assertEquals(LINE_CHAR, canvas.getNode(1, 1))
   }
 }

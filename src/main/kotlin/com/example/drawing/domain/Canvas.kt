@@ -31,13 +31,13 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
     for (y in 0 until height) {
       for (x in 0 until width) {
         if(y == 0 || y == height - 1) {
-          setNode(x, y, HORIZONTAL_CHAR)
+          setHorizontalChar(x, y)
         }
         else if(x == 0 || x == width - 1) {
-          setNode(x, y, VERTICAL_CHAR)
+          setVerticalChar(x, y)
         }
         else {
-          setNode(x, y, EMPTY_CHAR)
+          setEmptyChar(x, y)
         }
       }
     }
@@ -49,6 +49,22 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
 
   fun setNode(x: Int, y: Int, symbol: Char) {
     nodes[x][y] = symbol
+  }
+
+  fun setVerticalChar(x: Int, y: Int) {
+    setNode(x, y, VERTICAL_CHAR)
+  }
+
+  fun setHorizontalChar(x: Int, y: Int) {
+    setNode(x, y, HORIZONTAL_CHAR)
+  }
+
+  fun setEmptyChar(x: Int, y: Int) {
+    setNode(x, y, EMPTY_CHAR)
+  }
+
+  fun setLineChar(x: Int, y: Int) {
+    setNode(x, y, LINE_CHAR)
   }
 
   fun containsPoint(point: Point): Boolean
