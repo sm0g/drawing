@@ -4,10 +4,10 @@ import java.lang.StringBuilder
 
 class Canvas(innerWidth: Int, innerHeight: Int) {
   companion object {
-    const val HORIZONTAL_SYMBOL = '-'
-    const val VERTICAL_SYMBOL = '|'
-    const val EMPTY_SYMBOL = ' '
-    const val LINE_SYMBOL = 'x'
+    const val HORIZONTAL_CHAR = '-'
+    const val VERTICAL_CHAR = '|'
+    const val EMPTY_CHAR = ' '
+    const val LINE_CHAR = 'x'
   }
 
   private val width: Int
@@ -20,7 +20,7 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
     width = innerWidth + doubleBorderWidth
     height = innerHeight + doubleBorderWidth
     this.nodes = Array(this.height) {
-      CharArray(this.width) { EMPTY_SYMBOL }
+      CharArray(this.width) { EMPTY_CHAR }
     }
 
     drawBorder()
@@ -31,13 +31,13 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
     for (y in 0 until height) {
       for (x in 0 until width) {
         if(y == 0 || y == height - 1) {
-          setNode(x, y, HORIZONTAL_SYMBOL)
+          setNode(x, y, HORIZONTAL_CHAR)
         }
         else if(x == 0 || x == width - 1) {
-          setNode(x, y, VERTICAL_SYMBOL)
+          setNode(x, y, VERTICAL_CHAR)
         }
         else {
-          setNode(x, y, EMPTY_SYMBOL)
+          setNode(x, y, EMPTY_CHAR)
         }
       }
     }

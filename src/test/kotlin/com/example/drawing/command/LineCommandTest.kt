@@ -1,7 +1,7 @@
 package com.example.drawing.command
 
 import com.example.drawing.domain.Canvas
-import com.example.drawing.domain.Canvas.Companion.LINE_SYMBOL
+import com.example.drawing.domain.Canvas.Companion.LINE_CHAR
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
@@ -57,8 +57,8 @@ class LineCommandTest {
     val command = LineCommand(listOf("1", "1", "2", "1"), canvas)
     canvas = command.execute()
 
-    assertEquals(LINE_SYMBOL, canvas.getNode(1, 1))
-    assertEquals(LINE_SYMBOL, canvas.getNode(2, 1))
+    assertEquals(LINE_CHAR, canvas.getNode(1, 1))
+    assertEquals(LINE_CHAR, canvas.getNode(2, 1))
   }
 
   @Test
