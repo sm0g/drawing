@@ -67,10 +67,15 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
     setNode(x, y, LINE_CHAR)
   }
 
-  fun containsPoint(point: Point): Boolean
+  fun contains(point: Point): Boolean
   {
-    return point.x > 0 && point.x < width - 1
-        && point.y > 0 && point.y < height - 1
+    return contains(point.x, point.y)
+  }
+
+  fun contains(x: Int, y: Int): Boolean
+  {
+    return x > 0 && x < width - 1
+        && y > 0 && y < height - 1
   }
 
   override fun toString(): String {

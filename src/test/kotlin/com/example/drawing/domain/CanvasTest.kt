@@ -37,12 +37,12 @@ class CanvasTest {
   @Test
   fun containsPointTest() {
     val canvas = Canvas(2, 2)
-    assert(canvas.containsPoint(Point(1, 1)))
-    assert(canvas.containsPoint(Point(2, 2)))
-    assertFalse(canvas.containsPoint(Point(1, 0)))
-    assertFalse(canvas.containsPoint(Point(0, 1)))
-    assertFalse(canvas.containsPoint(Point(3, 1)))
-    assertFalse(canvas.containsPoint(Point(1, 3)))
+    assert(canvas.contains(Point(1, 1)))
+    assert(canvas.contains(Point(2, 2)))
+    assertFalse(canvas.contains(Point(1, 0)))
+    assertFalse(canvas.contains(Point(0, 1)))
+    assertFalse(canvas.contains(Point(3, 1)))
+    assertFalse(canvas.contains(Point(1, 3)))
   }
   
   @Test

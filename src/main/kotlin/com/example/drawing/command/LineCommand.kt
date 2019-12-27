@@ -2,7 +2,6 @@ package com.example.drawing.command
 
 import com.example.drawing.domain.Canvas
 import com.example.drawing.domain.Point
-import com.example.drawing.utils.toPositiveIntParam
 
 class LineCommand(args: List<String>, private val canvas: Canvas) : ICommand {
   private val start: Point
@@ -12,18 +11,11 @@ class LineCommand(args: List<String>, private val canvas: Canvas) : ICommand {
     require(args.isNotEmpty()) { "Command arguments must not be empty" }
     require(args.size == 4) { "There are must be 4 arguments: x1, y1, x2, y2" }
 
-    start = Point(
-      x = args[0].toPositiveIntParam(),
-      y = args[1].toPositiveIntParam()
-    )
+    start = Point(args[0], args[1])
+    end = Point(args[2], args[3])
 
-    end = Point(
-      x = args[2].toPositiveIntParam(),
-      y = args[3].toPositiveIntParam()
-    )
-
-    require(canvas.containsPoint(start)) { "Point (x1, y1) is out of canvas" }
-    require(canvas.containsPoint(end)) { "Point (x2, y2) is out of canvas" }
+    require(canvas.contains(start)) { "Point (x1, y1) is out of canvas" }
+    require(canvas.contains(end)) { "Point (x2, y2) is out of canvas" }
     require(start.x == end.x || start.y == end.y) { "Inclined lines are not supported" }
   }
 

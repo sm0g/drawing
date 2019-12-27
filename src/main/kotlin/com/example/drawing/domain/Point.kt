@@ -1,3 +1,8 @@
 package com.example.drawing.domain
 
-class Point(val x: Int, val y: Int)
+import com.example.drawing.utils.toPositiveIntParam
+
+class Point(val x: Int, val y: Int) {
+  constructor(xRaw: String, yRaw: String)
+    : this(xRaw.toPositiveIntParam(), yRaw.toPositiveIntParam())
+}
