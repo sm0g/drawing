@@ -8,14 +8,17 @@ import com.example.drawing.domain.Point
 import java.util.*
 import kotlin.collections.HashSet
 
-class BucketFillCommand(args: List<String>, private val canvas: Canvas) : ICommand {
+class BucketFillCommand(args: List<String>, incomingCanvas: Canvas?) : ICommand {
+  private val canvas: Canvas
   private val eyeDrop: Point
   private val color: Char
 
   init {
+    require(incomingCanvas != null) { "Create canvas at first" }
     require(args.isNotEmpty()) { "Command arguments must not be empty" }
     require(args.size == 3) { "There are must be 3 arguments: x, y, c" }
 
+    canvas = incomingCanvas
     eyeDrop = Point(args[0], args[1])
 
     require(canvas.contains(eyeDrop)) { "Point (x1, y1) is out of canvas" }

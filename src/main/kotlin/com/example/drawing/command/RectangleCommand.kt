@@ -3,14 +3,17 @@ package com.example.drawing.command
 import com.example.drawing.domain.Canvas
 import com.example.drawing.domain.Point
 
-class RectangleCommand(args: List<String>, private val canvas: Canvas) : ICommand {
+class RectangleCommand(args: List<String>, incomingCanvas: Canvas?) : ICommand {
+  private val canvas: Canvas
   private val topLeft: Point
   private val bottomRight: Point
 
   init {
+    require(incomingCanvas != null) { "Create canvas at first" }
     require(args.isNotEmpty()) { "Command arguments must not be empty" }
     require(args.size == 4) { "There are must be 4 arguments: x1, y1, x2, y2" }
 
+    canvas = incomingCanvas
     topLeft = Point(args[0], args[1])
     bottomRight = Point(args[2], args[3])
 
