@@ -1,25 +1,60 @@
 package com.example.drawing.domain
 
 import com.example.drawing.domain.Canvas.Companion.EMPTY_SYMBOL
+import com.example.drawing.domain.Canvas.Companion.HORIZONTAL_SYMBOL
 import com.example.drawing.domain.Canvas.Companion.VERTICAL_SYMBOL
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
 
 class CanvasTest {
   @Test
-  fun emptyNodesTest() {
+  fun newCanvasTest() {
     val canvas = Canvas(2, 2)
-    assertEquals(EMPTY_SYMBOL, canvas.getNode(0, 0))
-    assertEquals(EMPTY_SYMBOL, canvas.getNode(0, 1))
-    assertEquals(EMPTY_SYMBOL, canvas.getNode(1, 0))
+
+    assertEquals(HORIZONTAL_SYMBOL, canvas.getNode(0, 0))
+    assertEquals(HORIZONTAL_SYMBOL, canvas.getNode(1, 0))
+    assertEquals(HORIZONTAL_SYMBOL, canvas.getNode(2, 0))
+    assertEquals(HORIZONTAL_SYMBOL, canvas.getNode(3, 0))
+
+    assertEquals(VERTICAL_SYMBOL, canvas.getNode(0, 1))
     assertEquals(EMPTY_SYMBOL, canvas.getNode(1, 1))
+    assertEquals(EMPTY_SYMBOL, canvas.getNode(2, 1))
+    assertEquals(VERTICAL_SYMBOL, canvas.getNode(3, 1))
+
+    assertEquals(VERTICAL_SYMBOL, canvas.getNode(0, 2))
+    assertEquals(EMPTY_SYMBOL, canvas.getNode(1, 2))
+    assertEquals(EMPTY_SYMBOL, canvas.getNode(2, 2))
+    assertEquals(VERTICAL_SYMBOL, canvas.getNode(3, 2))
+
+    assertEquals(HORIZONTAL_SYMBOL, canvas.getNode(0, 3))
+    assertEquals(HORIZONTAL_SYMBOL, canvas.getNode(1, 3))
+    assertEquals(HORIZONTAL_SYMBOL, canvas.getNode(2, 3))
+    assertEquals(HORIZONTAL_SYMBOL, canvas.getNode(3, 3))
   }
 
+  @Test
+  fun containsPointTest() {
+    val canvas = Canvas(2, 2)
+    assert(canvas.containsPoint(Point(1, 1)))
+    assert(canvas.containsPoint(Point(2, 2)))
+    assertFalse(canvas.containsPoint(Point(1, 0)))
+    assertFalse(canvas.containsPoint(Point(0, 1)))
+    assertFalse(canvas.containsPoint(Point(3, 1)))
+    assertFalse(canvas.containsPoint(Point(1, 3)))
+  }
+  
   @Test
   fun toStringTest()
   {
     val canvas = Canvas(2, 2)
-    assertEquals("  \n  ", canvas.toString())
+
+    assertEquals("""
+      ----
+      |  |
+      |  |
+      ----
+    """.trimIndent(), canvas.toString())
   }
 
   @Test
