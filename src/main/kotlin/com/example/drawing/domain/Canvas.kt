@@ -47,8 +47,12 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
     return nodes[x][y]
   }
 
-  fun setNode(x: Int, y: Int, symbol: Char) {
-    nodes[x][y] = symbol
+  fun setNode(point: Point, char: Char) {
+    setNode(point.x, point.y, char)
+  }
+
+  fun setNode(x: Int, y: Int, char: Char) {
+    nodes[x][y] = char
   }
 
   fun setVerticalChar(x: Int, y: Int) {
@@ -76,6 +80,15 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
   {
     return x > 0 && x < width - 1
         && y > 0 && y < height - 1
+  }
+
+  fun equalsChar(point: Point, char: Char): Boolean {
+    return equalsChar(point.x, point.y, char)
+  }
+
+  fun equalsChar(x: Int, y: Int, char: Char): Boolean {
+    val existingChar = getNode(x, y)
+    return existingChar == char
   }
 
   override fun toString(): String {
