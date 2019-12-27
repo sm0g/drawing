@@ -49,13 +49,13 @@ class CanvasTest {
   fun toStringTest()
   {
     val canvas = Canvas(2, 2)
+    val expected = StringBuilder()
+      .appendln("----")
+      .appendln("|  |")
+      .appendln("|  |")
+        .append("----")
 
-    assertEquals("""
-      ----
-      |  |
-      |  |
-      ----
-    """.trimIndent(), canvas.toString())
+    assertEquals(expected.toString(), canvas.toString())
   }
 
   @Test

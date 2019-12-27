@@ -63,12 +63,12 @@ internal class CreateCommandTest {
   {
     val createCommand = CreateCommand(listOf("2", "2"))
     val canvas = createCommand.execute()
+    val expected = StringBuilder()
+      .appendln("----")
+      .appendln("|  |")
+      .appendln("|  |")
+        .append("----")
 
-    assertEquals("""
-      ----
-      |  |
-      |  |
-      ----
-    """.trimIndent(), canvas.toString())
+    assertEquals(expected.toString(), canvas.toString())
   }
 }
