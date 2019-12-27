@@ -19,8 +19,8 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
 
     width = innerWidth + doubleBorderWidth
     height = innerHeight + doubleBorderWidth
-    this.nodes = Array(this.height) {
-      CharArray(this.width) { EMPTY_CHAR }
+    this.nodes = Array(width) {
+      CharArray(height) { EMPTY_CHAR }
     }
 
     drawBorder()
