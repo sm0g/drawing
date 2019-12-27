@@ -9,7 +9,7 @@ class Canvas(val width: Int, val height: Int) {
     const val EMPTY_SYMBOL = ' '
   }
 
-  val nodes: Array<CharArray>
+  private val nodes: Array<CharArray>
 
   init {
     this.nodes = Array(this.height) {
