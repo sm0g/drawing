@@ -8,6 +8,13 @@ import org.junit.jupiter.api.Test
 
 class LineCommandTest {
   @Test
+  fun nullCanvasTest() {
+    assertThrows(IllegalArgumentException::class.java) {
+      LineCommand(listOf("1", "1", "2", "1"), null)
+    }
+  }
+
+  @Test
   fun emptyArgsTest() {
     assertThrows(IllegalArgumentException::class.java) {
       LineCommand(listOf(), Canvas(2, 2))

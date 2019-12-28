@@ -12,6 +12,13 @@ class BucketFillCommandTest {
   }
 
   @Test
+  fun nullCanvasTest() {
+    Assertions.assertThrows(IllegalArgumentException::class.java) {
+      BucketFillCommand(listOf("1", "1", "z"), null)
+    }
+  }
+
+  @Test
   fun emptyArgsTest() {
     Assertions.assertThrows(IllegalArgumentException::class.java) {
       BucketFillCommand(listOf(), Canvas(2, 2))

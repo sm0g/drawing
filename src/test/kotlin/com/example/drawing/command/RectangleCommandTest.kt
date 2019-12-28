@@ -9,6 +9,13 @@ import org.junit.jupiter.api.Test
 
 class RectangleCommandTest {
   @Test
+  fun nullCanvasTest() {
+    assertThrows(IllegalArgumentException::class.java) {
+      RectangleCommand(listOf("2", "1", "4", "3"), null)
+    }
+  }
+
+  @Test
   fun emptyArgsTest() {
     assertThrows(IllegalArgumentException::class.java) {
       RectangleCommand(listOf(), Canvas(2, 2))
