@@ -13,6 +13,7 @@ class CommandCreator {
       "L" -> LineCommand(commandArgs, canvas)
       "R" -> RectangleCommand(commandArgs, canvas)
       "B" -> BucketFillCommand(commandArgs, canvas)
+      "Q" -> QuitCommand()
       else -> throw IllegalArgumentException("Unknown command: $command")
     }
   }
