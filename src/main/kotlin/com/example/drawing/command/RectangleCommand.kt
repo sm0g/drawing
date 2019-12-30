@@ -28,9 +28,6 @@ class RectangleCommand(args: List<String>, incomingCanvas: Canvas?) : ICommand {
         if(isRectSide(x, y)) {
           canvas.setLineChar(x, y)
         }
-        else {
-          canvas.setEmptyChar(x, y)
-        }
       }
     }
 
