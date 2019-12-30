@@ -83,11 +83,7 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
   }
 
   fun equalsChar(point: Point, char: Char): Boolean {
-    return equalsChar(point.x, point.y, char)
-  }
-
-  fun equalsChar(x: Int, y: Int, char: Char): Boolean {
-    val existingChar = getNode(x, y)
+    val existingChar = getNode(point.x, point.y)
     return existingChar == char
   }
 
