@@ -23,19 +23,30 @@ class RectangleCommand(args: List<String>, incomingCanvas: Canvas?) : ICommand {
   }
 
   override fun execute(): Canvas {
-    for(x in topLeft.x .. bottomRight.x) {
-      for(y in topLeft.y .. bottomRight.y) {
-        if(isRectSide(x, y)) {
-          canvas.setLineChar(x, y)
-        }
-      }
-    }
+    val topRight = Point(bottomRight.x, topLeft.y)
+    val bottomLeft = Point(topLeft.x, bottomRight.y)
+
+    // top side
+    drawHorizontalLine(topLeft, topRight)
+    // bottom side
+    drawHorizontalLine(bottomLeft, bottomRight)
+    // left side
+    drawVerticalLine(topLeft, bottomLeft)
+    // right side
+    drawVerticalLine(topRight, bottomRight)
 
     return canvas
   }
 
-  private fun isRectSide(x: Int, y: Int): Boolean {
-    return x == topLeft.x || x == bottomRight.x
-        || y == topLeft.y || y == bottomRight.y
+  private fun drawHorizontalLine(start: Point, end: Point) {
+    for(x in start.x .. end.x) {
+      canvas.setLineChar(x, start.y)
+    }
+  }
+
+  private fun drawVerticalLine(start: Point, end: Point) {
+    for(y in start.y .. end.y) {
+      canvas.setLineChar(start.x, y)
+    }
   }
 }
