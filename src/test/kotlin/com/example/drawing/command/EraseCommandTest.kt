@@ -1,5 +1,6 @@
 package com.example.drawing.command
 
+import com.example.drawing.domain.Canvas
 import com.example.drawing.domain.Canvas.Companion.EMPTY_CHAR
 import com.example.drawing.domain.Canvas.Companion.HORIZONTAL_CHAR
 import com.example.drawing.domain.Canvas.Companion.VERTICAL_CHAR
@@ -7,35 +8,12 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
-internal class CreateCommandTest {
-  @Test
-  fun emptyArgsTest() {
-    assertThrows(IllegalArgumentException::class.java) {
-      CreateCommand(listOf())
-    }
-  }
-
-  @Test
-  fun invalidArgsSizeTest() {
-    assertThrows(IllegalArgumentException::class.java) {
-      CreateCommand(listOf("2"))
-    }
-  }
-
-  @Test
-  fun invalidArgsTest() {
-    assertThrows(IllegalArgumentException::class.java) {
-      CreateCommand(listOf("-1", "1"))
-    }
-    assertThrows(IllegalArgumentException::class.java) {
-      CreateCommand(listOf("1", "sf"))
-    }
-  }
-
+internal class EraseCommandTest {
   @Test
   fun executeTest() {
-    val createCommand = CreateCommand(listOf("2", "2"))
-    val canvas = createCommand.execute()
+    val canvas = Canvas(2, 2)
+    val createCommand = EraseCommand(canvas)
+    createCommand.execute()
 
     assertEquals(HORIZONTAL_CHAR, canvas.getNode(0, 0))
     assertEquals(HORIZONTAL_CHAR, canvas.getNode(1, 0))
@@ -61,7 +39,7 @@ internal class CreateCommandTest {
   @Test
   fun toStringTest()
   {
-    val createCommand = CreateCommand(listOf("2", "2"))
+    val createCommand = EraseCommand(Canvas(2, 2))
     val canvas = createCommand.execute()
 
     assertEquals(with(StringBuilder()) {

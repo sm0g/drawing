@@ -1,24 +1,19 @@
 package com.example.drawing.command
 
 import com.example.drawing.domain.Canvas
-import com.example.drawing.domain.Canvas.Companion.HORIZONTAL_CHAR
 import com.example.drawing.domain.Canvas.Companion.LINE_CHAR
-import com.example.drawing.domain.Canvas.Companion.VERTICAL_CHAR
 import com.example.drawing.domain.Point
 import java.util.*
 import kotlin.collections.HashSet
 
-class BucketFillCommand(args: List<String>, incomingCanvas: Canvas?) : ICommand {
-  private val canvas: Canvas
+class BucketFillCommand(args: List<String>, private val canvas: Canvas) : Command {
   private val eyeDrop: Point
   private val color: Char
 
   init {
-    require(incomingCanvas != null) { "Create canvas at first" }
     require(args.isNotEmpty()) { "Command arguments must not be empty" }
     require(args.size == 3) { "There are must be 3 arguments: x, y, c" }
 
-    canvas = incomingCanvas
     eyeDrop = Point(args[0], args[1])
 
     require(canvas.contains(eyeDrop)) { "Point (x1, y1) is out of canvas" }
@@ -27,7 +22,7 @@ class BucketFillCommand(args: List<String>, incomingCanvas: Canvas?) : ICommand 
     color = args[2].toCharArray().first()
   }
 
-  override fun execute(): Canvas {
+  override fun execute() {
     val queue = ArrayDeque<Point>()
     queue.offer(eyeDrop)
     val visitedPoints = HashSet<Point>()
@@ -36,9 +31,9 @@ class BucketFillCommand(args: List<String>, incomingCanvas: Canvas?) : ICommand 
       val current = queue.removeFirst()
 
       if(!visitedPoints.add(current)
-        || canvas.equalsChar(current, HORIZONTAL_CHAR)
-        || canvas.equalsChar(current, VERTICAL_CHAR)
-        || canvas.equalsChar(current, LINE_CHAR)) {
+        || current.x == 0 || current.x == canvas.width - 1
+        || current.y == 0 || current.y == canvas.height - 1
+        || canvas.isShapeChar(current)) {
         continue
       }
 
@@ -48,7 +43,5 @@ class BucketFillCommand(args: List<String>, incomingCanvas: Canvas?) : ICommand 
       queue.offer(Point(current.x, current.y - 1))
       queue.offer(Point(current.x, current.y + 1))
     }
-
-    return canvas
   }
 }

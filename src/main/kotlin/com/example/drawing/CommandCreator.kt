@@ -6,9 +6,9 @@ import com.example.drawing.domain.CommandInfo
 import com.example.drawing.domain.CommandType
 
 class CommandCreator {
-  fun createCommand(commandInfo: CommandInfo, canvas: Canvas): ICommand {
+  fun createCommand(commandInfo: CommandInfo, canvas: Canvas): Command {
     return when(commandInfo.commandType) {
-      CommandType.CREATE_CANVAS -> CreateCommand(commandInfo.commandArgs)
+      CommandType.ERASE -> EraseCommand(canvas)
       CommandType.LINE -> LineCommand(commandInfo.commandArgs, canvas)
       CommandType.RECTANGLE -> RectangleCommand(commandInfo.commandArgs, canvas)
       CommandType.BUCKET_FILL -> BucketFillCommand(commandInfo.commandArgs, canvas)

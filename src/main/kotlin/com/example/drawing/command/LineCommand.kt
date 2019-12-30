@@ -3,17 +3,14 @@ package com.example.drawing.command
 import com.example.drawing.domain.Canvas
 import com.example.drawing.domain.Point
 
-class LineCommand(args: List<String>, incomingCanvas: Canvas?) : ICommand {
-  private val canvas: Canvas
+class LineCommand(args: List<String>, private val canvas: Canvas) : Command {
   private val start: Point
   private val end: Point
 
   init {
-    require(incomingCanvas != null) { "Create canvas at first" }
     require(args.isNotEmpty()) { "Command arguments must not be empty" }
     require(args.size == 4) { "There are must be 4 arguments: x1, y1, x2, y2" }
 
-    canvas = incomingCanvas
     start = Point(args[0], args[1])
     end = Point(args[2], args[3])
 
@@ -22,31 +19,24 @@ class LineCommand(args: List<String>, incomingCanvas: Canvas?) : ICommand {
     require(start.x == end.x || start.y == end.y) { "Inclined lines are not supported" }
   }
 
-  override fun execute(): Canvas {
+  override fun execute() {
     if(start.x == end.x) {
-      return drawHorizontalLine()
+      drawHorizontalLine()
     }
-
-    if(start.y == end.y) {
-      return drawVerticalLine()
+    else if(start.y == end.y) {
+      drawVerticalLine()
     }
-
-    return canvas
   }
 
-  private fun drawHorizontalLine(): Canvas {
+  private fun drawHorizontalLine() {
     for(y in start.y .. end.y) {
       canvas.setLineChar(start.x, y)
     }
-
-    return canvas
   }
 
-  private fun drawVerticalLine(): Canvas {
+  private fun drawVerticalLine() {
     for(x in start.x .. end.x) {
       canvas.setLineChar(x, start.y)
     }
-
-    return canvas
   }
 }

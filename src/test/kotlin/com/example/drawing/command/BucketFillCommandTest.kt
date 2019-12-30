@@ -13,13 +13,6 @@ class BucketFillCommandTest {
   }
 
   @Test
-  fun nullCanvasTest() {
-    assertThrows(IllegalArgumentException::class.java) {
-      BucketFillCommand(listOf("1", "1", "z"), null)
-    }
-  }
-
-  @Test
   fun emptyArgsTest() {
     assertThrows(IllegalArgumentException::class.java) {
       BucketFillCommand(listOf(), Canvas(2, 2))
@@ -72,11 +65,11 @@ class BucketFillCommandTest {
 
   @Test
   fun executeTest() {
-    var canvas = Canvas(5, 3)
+    val canvas = Canvas(5, 3)
     val rectangleCommand = RectangleCommand(listOf("2", "1", "4", "3"), canvas)
-    canvas = rectangleCommand.execute()
+    rectangleCommand.execute()
     val bucketFillCommand = BucketFillCommand(listOf("1", "1", "z"), canvas)
-    canvas = bucketFillCommand.execute()
+    bucketFillCommand.execute()
 
     assertEquals(COLOR_CHAR, canvas.getNode(1, 1))
     assertEquals(LINE_CHAR, canvas.getNode(2, 1))
@@ -97,17 +90,16 @@ class BucketFillCommandTest {
   @Test
   fun toStringTest()
   {
-    var canvas = Canvas(5, 3)
+    val canvas = Canvas(5, 3)
     val bucketFillCommand = BucketFillCommand(listOf("1", "1", "z"), canvas)
-    canvas = bucketFillCommand.execute()
+    bucketFillCommand.execute()
 
-    assertEquals(with(StringBuilder()) {
-      appendln("-------")
-      appendln("|zzzzz|")
-      appendln("|zzzzz|")
-      appendln("|zzzzz|")
-      append("-------")
-      toString()
+    assertEquals(buildString {
+      appendln("       ")
+      appendln(" zzzzz ")
+      appendln(" zzzzz ")
+      appendln(" zzzzz ")
+      append("       ")
     }, canvas.toString())
   }
 }

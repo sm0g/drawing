@@ -9,13 +9,6 @@ import org.junit.jupiter.api.Test
 
 class RectangleCommandTest {
   @Test
-  fun nullCanvasTest() {
-    assertThrows(IllegalArgumentException::class.java) {
-      RectangleCommand(listOf("2", "1", "4", "3"), null)
-    }
-  }
-
-  @Test
   fun emptyArgsTest() {
     assertThrows(IllegalArgumentException::class.java) {
       RectangleCommand(listOf(), Canvas(2, 2))
@@ -61,9 +54,9 @@ class RectangleCommandTest {
 
   @Test
   fun executeTest() {
-    var canvas = Canvas(5, 3)
+    val canvas = Canvas(5, 3)
     val command = RectangleCommand(listOf("2", "1", "4", "3"), canvas)
-    canvas = command.execute()
+    command.execute()
 
     assertEquals(LINE_CHAR, canvas.getNode(2, 1))
     assertEquals(LINE_CHAR, canvas.getNode(3, 1))
@@ -81,17 +74,16 @@ class RectangleCommandTest {
   @Test
   fun toStringTest()
   {
-    var canvas = Canvas(5, 3)
+    val canvas = Canvas(5, 3)
     val command = RectangleCommand(listOf("2", "1", "4", "3"), canvas)
-    canvas = command.execute()
+    command.execute()
     
-    assertEquals(with(StringBuilder()) {
-      appendln("-------")
-      appendln("| xxx |")
-      appendln("| x x |")
-      appendln("| xxx |")
-      append("-------")
-      toString()
+    assertEquals(buildString {
+      appendln("       ")
+      appendln("  xxx  ")
+      appendln("  x x  ")
+      appendln("  xxx  ")
+      append("       ")
     }, canvas.toString())
   }
 }

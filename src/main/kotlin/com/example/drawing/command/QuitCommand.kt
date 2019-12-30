@@ -1,10 +1,9 @@
 package com.example.drawing.command
 
-import com.example.drawing.domain.Canvas
 import kotlin.system.exitProcess
 
-class QuitCommand : ICommand {
-  override fun execute(): Canvas {
+class QuitCommand : Command {
+  override fun execute() {
     exitProcess(0)
   }
 }

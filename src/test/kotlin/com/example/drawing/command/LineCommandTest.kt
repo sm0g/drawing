@@ -8,13 +8,6 @@ import org.junit.jupiter.api.Test
 
 class LineCommandTest {
   @Test
-  fun nullCanvasTest() {
-    assertThrows(IllegalArgumentException::class.java) {
-      LineCommand(listOf("1", "1", "2", "1"), null)
-    }
-  }
-
-  @Test
   fun emptyArgsTest() {
     assertThrows(IllegalArgumentException::class.java) {
       LineCommand(listOf(), Canvas(2, 2))
@@ -60,9 +53,9 @@ class LineCommandTest {
 
   @Test
   fun executeTest() {
-    var canvas = Canvas(2, 2)
+    val canvas = Canvas(2, 2)
     val command = LineCommand(listOf("1", "1", "2", "1"), canvas)
-    canvas = command.execute()
+    command.execute()
 
     assertEquals(LINE_CHAR, canvas.getNode(1, 1))
     assertEquals(LINE_CHAR, canvas.getNode(2, 1))
@@ -71,16 +64,15 @@ class LineCommandTest {
   @Test
   fun toStringTest()
   {
-    var canvas = Canvas(2, 2)
+    val canvas = Canvas(2, 2)
     val command = LineCommand(listOf("1", "1", "1", "2"), canvas)
-    canvas = command.execute()
+    command.execute()
 
-    assertEquals(with(StringBuilder()) {
-      appendln("----")
-      appendln("|x |")
-      appendln("|x |")
-      append("----")
-      toString()
+    assertEquals(buildString {
+      appendln("    ")
+      appendln(" x  ")
+      appendln(" x  ")
+      append("    ")
     }, canvas.toString())
   }
 }

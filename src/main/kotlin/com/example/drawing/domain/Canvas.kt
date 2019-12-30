@@ -11,8 +11,8 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
     const val LINE_CHAR = 'x'
   }
 
-  private val width: Int
-  private val height: Int
+  val width: Int
+  val height: Int
   private val nodes: Array<CharArray>
 
   constructor(args: List<String>) : this(args.first().toPositiveIntParam(), args.last().toPositiveIntParam()) {
@@ -26,25 +26,6 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
     height = innerHeight + doubleBorderWidth
     this.nodes = Array(width) {
       CharArray(height) { EMPTY_CHAR }
-    }
-
-    drawBorder()
-  }
-
-  private fun drawBorder()
-  {
-    for (y in 0 until height) {
-      for (x in 0 until width) {
-        if(y == 0 || y == height - 1) {
-          setHorizontalChar(x, y)
-        }
-        else if(x == 0 || x == width - 1) {
-          setVerticalChar(x, y)
-        }
-        else {
-          setEmptyChar(x, y)
-        }
-      }
     }
   }
 
@@ -60,18 +41,6 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
     nodes[x][y] = char
   }
 
-  fun setVerticalChar(x: Int, y: Int) {
-    setNode(x, y, VERTICAL_CHAR)
-  }
-
-  fun setHorizontalChar(x: Int, y: Int) {
-    setNode(x, y, HORIZONTAL_CHAR)
-  }
-
-  fun setEmptyChar(x: Int, y: Int) {
-    setNode(x, y, EMPTY_CHAR)
-  }
-
   fun setLineChar(x: Int, y: Int) {
     setNode(x, y, LINE_CHAR)
   }
@@ -85,6 +54,10 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
   {
     return x > 0 && x < width - 1
         && y > 0 && y < height - 1
+  }
+
+  fun isShapeChar(point: Point): Boolean {
+    return equalsChar(point, LINE_CHAR)
   }
 
   fun equalsChar(point: Point, char: Char): Boolean {

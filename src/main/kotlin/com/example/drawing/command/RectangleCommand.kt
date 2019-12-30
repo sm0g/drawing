@@ -3,17 +3,14 @@ package com.example.drawing.command
 import com.example.drawing.domain.Canvas
 import com.example.drawing.domain.Point
 
-class RectangleCommand(args: List<String>, incomingCanvas: Canvas?) : ICommand {
-  private val canvas: Canvas
+class RectangleCommand(args: List<String>, private val canvas: Canvas) : Command {
   private val topLeft: Point
   private val bottomRight: Point
 
   init {
-    require(incomingCanvas != null) { "Create canvas at first" }
     require(args.isNotEmpty()) { "Command arguments must not be empty" }
     require(args.size == 4) { "There are must be 4 arguments: x1, y1, x2, y2" }
 
-    canvas = incomingCanvas
     topLeft = Point(args[0], args[1])
     bottomRight = Point(args[2], args[3])
 
@@ -22,7 +19,7 @@ class RectangleCommand(args: List<String>, incomingCanvas: Canvas?) : ICommand {
     require(topLeft.x < bottomRight.x && topLeft.y < bottomRight.y) { "Bottom right corner has wrong coordinates: x2 < x1 or y2 < y1" }
   }
 
-  override fun execute(): Canvas {
+  override fun execute() {
     val topRight = Point(bottomRight.x, topLeft.y)
     val bottomLeft = Point(topLeft.x, bottomRight.y)
 
@@ -34,8 +31,6 @@ class RectangleCommand(args: List<String>, incomingCanvas: Canvas?) : ICommand {
     drawVerticalLine(topLeft, bottomLeft)
     // right side
     drawVerticalLine(topRight, bottomRight)
-
-    return canvas
   }
 
   private fun drawHorizontalLine(start: Point, end: Point) {

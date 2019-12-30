@@ -36,7 +36,7 @@ fun main(args: Array<String>) {
     try {
       val commandInfo = CommandInfo(input)
 
-      if(commandInfo.commandType == CommandType.CREATE_CANVAS) {
+      if(commandInfo.commandType == CommandType.ERASE) {
         canvas = Canvas(commandInfo.commandArgs)
       }
       else if(canvas == null) {
@@ -45,7 +45,7 @@ fun main(args: Array<String>) {
       }
 
       val command = commandCreator.createCommand(commandInfo, canvas)
-      canvas = command.execute()
+      command.execute()
 
       println(canvas.toString())
     }
