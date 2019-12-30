@@ -74,12 +74,13 @@ class LineCommandTest {
     var canvas = Canvas(2, 2)
     val command = LineCommand(listOf("1", "1", "1", "2"), canvas)
     canvas = command.execute()
-    val expected = StringBuilder()
-      .appendln("----")
-      .appendln("|x |")
-      .appendln("|x |")
-        .append("----")
 
-    assertEquals(expected.toString(), canvas.toString())
+    assertEquals(with(StringBuilder()) {
+      appendln("----")
+      appendln("|x |")
+      appendln("|x |")
+      append("----")
+      toString()
+    }, canvas.toString())
   }
 }

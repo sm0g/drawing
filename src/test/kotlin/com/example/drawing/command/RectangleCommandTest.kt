@@ -84,13 +84,14 @@ class RectangleCommandTest {
     var canvas = Canvas(5, 3)
     val command = RectangleCommand(listOf("2", "1", "4", "3"), canvas)
     canvas = command.execute()
-    val expected = StringBuilder()
-    .appendln("-------")
-    .appendln("| xxx |")
-    .appendln("| x x |")
-    .appendln("| xxx |")
-      .append("-------")
-
-    assertEquals(expected.toString(), canvas.toString())
+    
+    assertEquals(with(StringBuilder()) {
+      appendln("-------")
+      appendln("| xxx |")
+      appendln("| x x |")
+      appendln("| xxx |")
+      append("-------")
+      toString()
+    }, canvas.toString())
   }
 }
