@@ -1,6 +1,8 @@
 package com.example.drawing
 
 import com.example.drawing.domain.Canvas
+import com.example.drawing.domain.CommandInfo
+import com.example.drawing.domain.CommandType
 
 val intro = """
   Supported commands:
@@ -32,8 +34,17 @@ fun main(args: Array<String>) {
     }
 
     try {
-      val commandArgs = input.split(' ')
-      val command = commandCreator.createCommand(commandArgs, canvas)
+      val commandInfo = CommandInfo(input)
+
+      if(commandInfo.commandType == CommandType.CREATE_CANVAS) {
+        canvas = Canvas(commandInfo.commandArgs)
+      }
+      else if(canvas == null) {
+        print("Create canvas at first")
+        continue
+      }
+
+      val command = commandCreator.createCommand(commandInfo, canvas)
       canvas = command.execute()
 
       println(canvas.toString())

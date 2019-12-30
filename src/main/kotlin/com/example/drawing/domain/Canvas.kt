@@ -1,5 +1,6 @@
 package com.example.drawing.domain
 
+import com.example.drawing.utils.toPositiveIntParam
 import java.lang.StringBuilder
 
 class Canvas(innerWidth: Int, innerHeight: Int) {
@@ -13,6 +14,10 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
   private val width: Int
   private val height: Int
   private val nodes: Array<CharArray>
+
+  constructor(args: List<String>) : this(args.first().toPositiveIntParam(), args.last().toPositiveIntParam()) {
+    require(args.size == 2) { "Width and Height arguments are required" }
+  }
 
   init {
     val doubleBorderWidth = 2

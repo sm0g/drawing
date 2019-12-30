@@ -16,6 +16,6 @@ class CreateCommand(args: List<String>) : ICommand {
   }
 
   override fun execute(): Canvas {
-    return Canvas(width, height)
+    return Canvas(listOf())
   }
 }

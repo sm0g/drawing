@@ -2,19 +2,17 @@ package com.example.drawing
 
 import com.example.drawing.command.*
 import com.example.drawing.domain.Canvas
+import com.example.drawing.domain.CommandInfo
+import com.example.drawing.domain.CommandType
 
 class CommandCreator {
-  fun createCommand(args: List<String>, canvas: Canvas?): ICommand {
-    val command = args.first()
-    val commandArgs = args.drop(1)
-
-    return when(command.toUpperCase()) {
-      "C" -> CreateCommand(commandArgs)
-      "L" -> LineCommand(commandArgs, canvas)
-      "R" -> RectangleCommand(commandArgs, canvas)
-      "B" -> BucketFillCommand(commandArgs, canvas)
-      "Q" -> QuitCommand()
-      else -> throw IllegalArgumentException("Unknown command: $command")
+  fun createCommand(commandInfo: CommandInfo, canvas: Canvas): ICommand {
+    return when(commandInfo.commandType) {
+      CommandType.CREATE_CANVAS -> CreateCommand(commandInfo.commandArgs)
+      CommandType.LINE -> LineCommand(commandInfo.commandArgs, canvas)
+      CommandType.RECTANGLE -> RectangleCommand(commandInfo.commandArgs, canvas)
+      CommandType.BUCKET_FILL -> BucketFillCommand(commandInfo.commandArgs, canvas)
+      CommandType.QUIT -> QuitCommand()
     }
   }
 }
