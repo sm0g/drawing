@@ -36,7 +36,7 @@ fun main(args: Array<String>) {
     try {
       val commandInfo = CommandInfo(input)
 
-      if(commandInfo.commandType == CommandType.BORDER) {
+      if(commandInfo.commandType == CommandType.CREATE) {
         canvas = Canvas(commandInfo.commandArgs)
       }
       else if(canvas == null) {

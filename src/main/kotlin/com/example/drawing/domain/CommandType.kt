@@ -1,7 +1,7 @@
 package com.example.drawing.domain
 
 enum class CommandType(private val value: String) {
-  BORDER("C"),
+  CREATE("C"),
   LINE("L"),
   RECTANGLE("R"),
   BUCKET_FILL("B"),

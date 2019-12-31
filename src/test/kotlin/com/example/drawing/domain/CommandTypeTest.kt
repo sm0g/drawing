@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 class CommandTypeTest {
   @Test
   fun validParseTest() {
-    assertEquals(CommandType.BORDER, CommandType.parse("C"))
+    assertEquals(CommandType.CREATE, CommandType.parse("C"))
     assertEquals(CommandType.LINE, CommandType.parse("L"))
     assertEquals(CommandType.RECTANGLE, CommandType.parse("R"))
     assertEquals(CommandType.BUCKET_FILL, CommandType.parse("B"))
