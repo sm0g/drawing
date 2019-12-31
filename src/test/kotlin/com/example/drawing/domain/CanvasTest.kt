@@ -1,11 +1,10 @@
 package com.example.drawing.domain
 
 import com.example.drawing.command.BucketFillCommand
-import com.example.drawing.command.EraseCommand
+import com.example.drawing.command.BorderCommand
 import com.example.drawing.command.LineCommand
 import com.example.drawing.command.RectangleCommand
 import com.example.drawing.domain.Canvas.Companion.EMPTY_CHAR
-import com.example.drawing.domain.Canvas.Companion.HORIZONTAL_CHAR
 import com.example.drawing.domain.Canvas.Companion.LINE_CHAR
 import com.example.drawing.domain.Canvas.Companion.VERTICAL_CHAR
 import org.junit.jupiter.api.Assertions.*
@@ -29,50 +28,50 @@ class CanvasTest {
   fun newCanvasArgsListTest() {
     val canvas = Canvas(listOf("2", "2"))
 
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(0, 0))
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(1, 0))
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(2, 0))
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(3, 0))
+    assertEquals(EMPTY_CHAR, canvas.getNode(0, 0))
+    assertEquals(EMPTY_CHAR, canvas.getNode(1, 0))
+    assertEquals(EMPTY_CHAR, canvas.getNode(2, 0))
+    assertEquals(EMPTY_CHAR, canvas.getNode(3, 0))
 
-    assertEquals(VERTICAL_CHAR, canvas.getNode(0, 1))
+    assertEquals(EMPTY_CHAR, canvas.getNode(0, 1))
     assertEquals(EMPTY_CHAR, canvas.getNode(1, 1))
     assertEquals(EMPTY_CHAR, canvas.getNode(2, 1))
-    assertEquals(VERTICAL_CHAR, canvas.getNode(3, 1))
+    assertEquals(EMPTY_CHAR, canvas.getNode(3, 1))
 
-    assertEquals(VERTICAL_CHAR, canvas.getNode(0, 2))
+    assertEquals(EMPTY_CHAR, canvas.getNode(0, 2))
     assertEquals(EMPTY_CHAR, canvas.getNode(1, 2))
     assertEquals(EMPTY_CHAR, canvas.getNode(2, 2))
-    assertEquals(VERTICAL_CHAR, canvas.getNode(3, 2))
+    assertEquals(EMPTY_CHAR, canvas.getNode(3, 2))
 
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(0, 3))
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(1, 3))
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(2, 3))
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(3, 3))
+    assertEquals(EMPTY_CHAR, canvas.getNode(0, 3))
+    assertEquals(EMPTY_CHAR, canvas.getNode(1, 3))
+    assertEquals(EMPTY_CHAR, canvas.getNode(2, 3))
+    assertEquals(EMPTY_CHAR, canvas.getNode(3, 3))
   }
 
   @Test
   fun newCanvasTest() {
     val canvas = Canvas(2, 2)
 
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(0, 0))
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(1, 0))
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(2, 0))
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(3, 0))
+    assertEquals(EMPTY_CHAR, canvas.getNode(0, 0))
+    assertEquals(EMPTY_CHAR, canvas.getNode(1, 0))
+    assertEquals(EMPTY_CHAR, canvas.getNode(2, 0))
+    assertEquals(EMPTY_CHAR, canvas.getNode(3, 0))
 
-    assertEquals(VERTICAL_CHAR, canvas.getNode(0, 1))
+    assertEquals(EMPTY_CHAR, canvas.getNode(0, 1))
     assertEquals(EMPTY_CHAR, canvas.getNode(1, 1))
     assertEquals(EMPTY_CHAR, canvas.getNode(2, 1))
-    assertEquals(VERTICAL_CHAR, canvas.getNode(3, 1))
+    assertEquals(EMPTY_CHAR, canvas.getNode(3, 1))
 
-    assertEquals(VERTICAL_CHAR, canvas.getNode(0, 2))
+    assertEquals(EMPTY_CHAR, canvas.getNode(0, 2))
     assertEquals(EMPTY_CHAR, canvas.getNode(1, 2))
     assertEquals(EMPTY_CHAR, canvas.getNode(2, 2))
-    assertEquals(VERTICAL_CHAR, canvas.getNode(3, 2))
+    assertEquals(EMPTY_CHAR, canvas.getNode(3, 2))
 
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(0, 3))
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(1, 3))
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(2, 3))
-    assertEquals(HORIZONTAL_CHAR, canvas.getNode(3, 3))
+    assertEquals(EMPTY_CHAR, canvas.getNode(0, 3))
+    assertEquals(EMPTY_CHAR, canvas.getNode(1, 3))
+    assertEquals(EMPTY_CHAR, canvas.getNode(2, 3))
+    assertEquals(EMPTY_CHAR, canvas.getNode(3, 3))
   }
 
   @Test
@@ -90,12 +89,11 @@ class CanvasTest {
   fun toStringTest()
   {
     val canvas = Canvas(2, 2)
-    assertEquals(with(StringBuilder()) {
-      appendln("----")
-      appendln("|  |")
-      appendln("|  |")
-      append("----")
-      toString()
+    assertEquals(buildString {
+      appendln("    ")
+      appendln("    ")
+      appendln("    ")
+      append("    ")
     }, canvas.toString())
   }
 
@@ -128,7 +126,7 @@ class CanvasTest {
   {
     val canvas = Canvas(listOf("20", "4"))
 
-    val createCommand = EraseCommand(canvas)
+    val createCommand = BorderCommand(canvas)
     createCommand.execute()
     assertEquals("""
       ----------------------

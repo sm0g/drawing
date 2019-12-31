@@ -14,16 +14,15 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
   val width: Int
   val height: Int
   private val nodes: Array<CharArray>
+  private val borderWidth: Int = 1
 
   constructor(args: List<String>) : this(args.first().toPositiveIntParam(), args.last().toPositiveIntParam()) {
     require(args.size == 2) { "Width and Height arguments are required" }
   }
 
   init {
-    val doubleBorderWidth = 2
-
-    width = innerWidth + doubleBorderWidth
-    height = innerHeight + doubleBorderWidth
+    width = innerWidth + borderWidth * 2
+    height = innerHeight + borderWidth * 2
     this.nodes = Array(width) {
       CharArray(height) { EMPTY_CHAR }
     }
@@ -52,8 +51,8 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
 
   fun contains(x: Int, y: Int): Boolean
   {
-    return x > 0 && x < width - 1
-        && y > 0 && y < height - 1
+    return x >= borderWidth && x <= width - borderWidth - 1
+        && y >= borderWidth && y <= height - borderWidth - 1
   }
 
   fun isShapeChar(point: Point): Boolean {

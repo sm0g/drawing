@@ -5,14 +5,13 @@ import com.example.drawing.domain.Canvas.Companion.EMPTY_CHAR
 import com.example.drawing.domain.Canvas.Companion.HORIZONTAL_CHAR
 import com.example.drawing.domain.Canvas.Companion.VERTICAL_CHAR
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
-internal class EraseCommandTest {
+internal class BorderCommandTest {
   @Test
   fun executeTest() {
     val canvas = Canvas(2, 2)
-    val createCommand = EraseCommand(canvas)
+    val createCommand = BorderCommand(canvas)
     createCommand.execute()
 
     assertEquals(HORIZONTAL_CHAR, canvas.getNode(0, 0))
@@ -39,15 +38,15 @@ internal class EraseCommandTest {
   @Test
   fun toStringTest()
   {
-    val createCommand = EraseCommand(Canvas(2, 2))
-    val canvas = createCommand.execute()
+    val canvas = Canvas(2, 2)
+    val createCommand = BorderCommand(canvas)
+    createCommand.execute()
 
-    assertEquals(with(StringBuilder()) {
-      appendln("----")
-      appendln("|  |")
-      appendln("|  |")
-      append("----")
-      toString()
-    }, canvas.toString())
+    assertEquals("""
+      ----
+      |  |
+      |  |
+      ----
+    """.trimIndent(), canvas.toString())
   }
 }
