@@ -17,6 +17,7 @@ class BucketFillCommand(args: List<String>, private val canvas: Canvas) : Comman
     eyeDrop = Point(args[0], args[1])
 
     require(canvas.contains(eyeDrop)) { "Point (x1, y1) is out of canvas" }
+    require(args[2].length <= 1) { "Invalid color symbol" }
 
     color = if(args[2] == "")
       EMPTY_CHAR
