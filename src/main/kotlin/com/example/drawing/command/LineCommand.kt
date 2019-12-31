@@ -1,12 +1,13 @@
 package com.example.drawing.command
 
 import com.example.drawing.domain.Canvas
+import com.example.drawing.domain.CanvasChar
 import com.example.drawing.domain.Point
 
 class LineCommand(args: List<String>, private val canvas: Canvas) : Command {
   private val start: Point
   private val end: Point
-  private val color: Char = 'x'
+  private val color: Char = CanvasChar.LINE_CHAR
 
   init {
     require(args.isNotEmpty()) { "Command arguments must not be empty" }

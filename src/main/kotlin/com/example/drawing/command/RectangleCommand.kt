@@ -1,12 +1,13 @@
 package com.example.drawing.command
 
 import com.example.drawing.domain.Canvas
+import com.example.drawing.domain.CanvasChar
 import com.example.drawing.domain.Point
 
 class RectangleCommand(args: List<String>, private val canvas: Canvas) : Command {
   private val topLeft: Point
   private val bottomRight: Point
-  private val color: Char = 'x'
+  private val color: Char = CanvasChar.LINE_CHAR
 
   init {
     require(args.isNotEmpty()) { "Command arguments must not be empty" }

@@ -17,7 +17,7 @@ class Canvas(innerWidth: Int, innerHeight: Int) {
     width = innerWidth + borderWidth * 2
     height = innerHeight + borderWidth * 2
     this.nodes = Array(width) {
-      CharArray(height) { ' ' }
+      CharArray(height) { CanvasChar.EMPTY_CHAR }
     }
   }
 

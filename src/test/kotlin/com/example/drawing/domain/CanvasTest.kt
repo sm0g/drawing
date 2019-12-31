@@ -4,15 +4,12 @@ import com.example.drawing.command.BucketFillCommand
 import com.example.drawing.command.BorderCommand
 import com.example.drawing.command.LineCommand
 import com.example.drawing.command.RectangleCommand
+import com.example.drawing.domain.CanvasChar.Companion.EMPTY_CHAR
+import com.example.drawing.domain.CanvasChar.Companion.LINE_CHAR
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class CanvasTest {
-  companion object {
-    const val EMPTY_CHAR = ' '
-    const val LINE_CHAR = 'x'
-  }
-
   @Test
   fun newCanvasInvalidArgsListTest() {
     assertThrows(IllegalArgumentException::class.java) {
