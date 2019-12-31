@@ -6,6 +6,7 @@ import com.example.drawing.domain.Point
 class RectangleCommand(args: List<String>, private val canvas: Canvas) : Command {
   private val topLeft: Point
   private val bottomRight: Point
+  private val color: Char = 'x'
 
   init {
     require(args.isNotEmpty()) { "Command arguments must not be empty" }
@@ -35,13 +36,13 @@ class RectangleCommand(args: List<String>, private val canvas: Canvas) : Command
 
   private fun drawHorizontalLine(start: Point, end: Point) {
     for(x in start.x .. end.x) {
-      canvas.setLineChar(x, start.y)
+      canvas.setChar(x, start.y, color)
     }
   }
 
   private fun drawVerticalLine(start: Point, end: Point) {
     for(y in start.y .. end.y) {
-      canvas.setLineChar(start.x, y)
+      canvas.setChar(start.x, y, color)
     }
   }
 }

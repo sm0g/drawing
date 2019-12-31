@@ -1,7 +1,6 @@
 package com.example.drawing.command
 
 import com.example.drawing.domain.Canvas
-import com.example.drawing.domain.Canvas.Companion.LINE_CHAR
 import com.example.drawing.domain.Point
 import java.util.*
 import kotlin.collections.HashSet
@@ -17,7 +16,6 @@ class BucketFillCommand(args: List<String>, private val canvas: Canvas) : Comman
     eyeDrop = Point(args[0], args[1])
 
     require(canvas.contains(eyeDrop)) { "Point (x1, y1) is out of canvas" }
-    require(!canvas.isShapeChar(eyeDrop)) { "Point (x1, y1) points to a shape. Select empty spot" }
     require(args[2].length == 1) { "Invalid color symbol" }
 
     color = args[2].toCharArray().first()
@@ -27,6 +25,7 @@ class BucketFillCommand(args: List<String>, private val canvas: Canvas) : Comman
     val queue = ArrayDeque<Point>()
     queue.offer(eyeDrop)
     val visitedPoints = HashSet<Point>()
+    val targetChar = canvas.getChar(eyeDrop.x, eyeDrop.y)
 
     while (queue.isNotEmpty()) {
       val current = queue.removeFirst()
@@ -34,11 +33,11 @@ class BucketFillCommand(args: List<String>, private val canvas: Canvas) : Comman
       if(!visitedPoints.add(current)
         || current.x == 0 || current.x == canvas.width - 1
         || current.y == 0 || current.y == canvas.height - 1
-        || canvas.isShapeChar(current)) {
+        || !canvas.equalsChar(current, targetChar)) {
         continue
       }
 
-      canvas.setNode(current, color)
+      canvas.setChar(current, color)
       queue.offer(Point(current.x - 1, current.y))
       queue.offer(Point(current.x + 1, current.y))
       queue.offer(Point(current.x, current.y - 1))

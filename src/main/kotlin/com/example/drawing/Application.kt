@@ -3,6 +3,7 @@ package com.example.drawing
 import com.example.drawing.domain.Canvas
 import com.example.drawing.domain.CommandInfo
 import com.example.drawing.domain.CommandType
+import kotlin.system.exitProcess
 
 val intro = """
   Supported commands:
@@ -35,6 +36,10 @@ fun main(args: Array<String>) {
 
     try {
       val commandInfo = CommandInfo(input)
+
+      if(commandInfo.commandType == CommandType.QUIT) {
+        break
+      }
 
       if(commandInfo.commandType == CommandType.CREATE) {
         canvas = Canvas(commandInfo.commandArgs)

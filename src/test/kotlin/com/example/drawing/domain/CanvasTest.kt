@@ -4,13 +4,15 @@ import com.example.drawing.command.BucketFillCommand
 import com.example.drawing.command.BorderCommand
 import com.example.drawing.command.LineCommand
 import com.example.drawing.command.RectangleCommand
-import com.example.drawing.domain.Canvas.Companion.EMPTY_CHAR
-import com.example.drawing.domain.Canvas.Companion.LINE_CHAR
-import com.example.drawing.domain.Canvas.Companion.VERTICAL_CHAR
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class CanvasTest {
+  companion object {
+    const val EMPTY_CHAR = ' '
+    const val LINE_CHAR = 'x'
+  }
+
   @Test
   fun newCanvasInvalidArgsListTest() {
     assertThrows(IllegalArgumentException::class.java) {
@@ -28,50 +30,50 @@ class CanvasTest {
   fun newCanvasArgsListTest() {
     val canvas = Canvas(listOf("2", "2"))
 
-    assertEquals(EMPTY_CHAR, canvas.getNode(0, 0))
-    assertEquals(EMPTY_CHAR, canvas.getNode(1, 0))
-    assertEquals(EMPTY_CHAR, canvas.getNode(2, 0))
-    assertEquals(EMPTY_CHAR, canvas.getNode(3, 0))
+    assertEquals(EMPTY_CHAR, canvas.getChar(0, 0))
+    assertEquals(EMPTY_CHAR, canvas.getChar(1, 0))
+    assertEquals(EMPTY_CHAR, canvas.getChar(2, 0))
+    assertEquals(EMPTY_CHAR, canvas.getChar(3, 0))
 
-    assertEquals(EMPTY_CHAR, canvas.getNode(0, 1))
-    assertEquals(EMPTY_CHAR, canvas.getNode(1, 1))
-    assertEquals(EMPTY_CHAR, canvas.getNode(2, 1))
-    assertEquals(EMPTY_CHAR, canvas.getNode(3, 1))
+    assertEquals(EMPTY_CHAR, canvas.getChar(0, 1))
+    assertEquals(EMPTY_CHAR, canvas.getChar(1, 1))
+    assertEquals(EMPTY_CHAR, canvas.getChar(2, 1))
+    assertEquals(EMPTY_CHAR, canvas.getChar(3, 1))
 
-    assertEquals(EMPTY_CHAR, canvas.getNode(0, 2))
-    assertEquals(EMPTY_CHAR, canvas.getNode(1, 2))
-    assertEquals(EMPTY_CHAR, canvas.getNode(2, 2))
-    assertEquals(EMPTY_CHAR, canvas.getNode(3, 2))
+    assertEquals(EMPTY_CHAR, canvas.getChar(0, 2))
+    assertEquals(EMPTY_CHAR, canvas.getChar(1, 2))
+    assertEquals(EMPTY_CHAR, canvas.getChar(2, 2))
+    assertEquals(EMPTY_CHAR, canvas.getChar(3, 2))
 
-    assertEquals(EMPTY_CHAR, canvas.getNode(0, 3))
-    assertEquals(EMPTY_CHAR, canvas.getNode(1, 3))
-    assertEquals(EMPTY_CHAR, canvas.getNode(2, 3))
-    assertEquals(EMPTY_CHAR, canvas.getNode(3, 3))
+    assertEquals(EMPTY_CHAR, canvas.getChar(0, 3))
+    assertEquals(EMPTY_CHAR, canvas.getChar(1, 3))
+    assertEquals(EMPTY_CHAR, canvas.getChar(2, 3))
+    assertEquals(EMPTY_CHAR, canvas.getChar(3, 3))
   }
 
   @Test
   fun newCanvasTest() {
     val canvas = Canvas(2, 2)
 
-    assertEquals(EMPTY_CHAR, canvas.getNode(0, 0))
-    assertEquals(EMPTY_CHAR, canvas.getNode(1, 0))
-    assertEquals(EMPTY_CHAR, canvas.getNode(2, 0))
-    assertEquals(EMPTY_CHAR, canvas.getNode(3, 0))
+    assertEquals(EMPTY_CHAR, canvas.getChar(0, 0))
+    assertEquals(EMPTY_CHAR, canvas.getChar(1, 0))
+    assertEquals(EMPTY_CHAR, canvas.getChar(2, 0))
+    assertEquals(EMPTY_CHAR, canvas.getChar(3, 0))
 
-    assertEquals(EMPTY_CHAR, canvas.getNode(0, 1))
-    assertEquals(EMPTY_CHAR, canvas.getNode(1, 1))
-    assertEquals(EMPTY_CHAR, canvas.getNode(2, 1))
-    assertEquals(EMPTY_CHAR, canvas.getNode(3, 1))
+    assertEquals(EMPTY_CHAR, canvas.getChar(0, 1))
+    assertEquals(EMPTY_CHAR, canvas.getChar(1, 1))
+    assertEquals(EMPTY_CHAR, canvas.getChar(2, 1))
+    assertEquals(EMPTY_CHAR, canvas.getChar(3, 1))
 
-    assertEquals(EMPTY_CHAR, canvas.getNode(0, 2))
-    assertEquals(EMPTY_CHAR, canvas.getNode(1, 2))
-    assertEquals(EMPTY_CHAR, canvas.getNode(2, 2))
-    assertEquals(EMPTY_CHAR, canvas.getNode(3, 2))
+    assertEquals(EMPTY_CHAR, canvas.getChar(0, 2))
+    assertEquals(EMPTY_CHAR, canvas.getChar(1, 2))
+    assertEquals(EMPTY_CHAR, canvas.getChar(2, 2))
+    assertEquals(EMPTY_CHAR, canvas.getChar(3, 2))
 
-    assertEquals(EMPTY_CHAR, canvas.getNode(0, 3))
-    assertEquals(EMPTY_CHAR, canvas.getNode(1, 3))
-    assertEquals(EMPTY_CHAR, canvas.getNode(2, 3))
-    assertEquals(EMPTY_CHAR, canvas.getNode(3, 3))
+    assertEquals(EMPTY_CHAR, canvas.getChar(0, 3))
+    assertEquals(EMPTY_CHAR, canvas.getChar(1, 3))
+    assertEquals(EMPTY_CHAR, canvas.getChar(2, 3))
+    assertEquals(EMPTY_CHAR, canvas.getChar(3, 3))
   }
 
   @Test
@@ -100,24 +102,16 @@ class CanvasTest {
   @Test
   fun getterSetterTest() {
     val canvas = Canvas(2, 2)
-    canvas.setNode(1, 1, VERTICAL_CHAR)
+    canvas.setChar(1, 1, LINE_CHAR)
 
-    assertEquals(VERTICAL_CHAR, canvas.getNode(1, 1))
-  }
-
-  @Test
-  fun setLineCharTest() {
-    val canvas = Canvas(2, 2)
-    canvas.setLineChar(1, 1)
-
-    assertEquals(LINE_CHAR, canvas.getNode(1, 1))
+    assertEquals(LINE_CHAR, canvas.getChar(1, 1))
   }
 
   @Test
   fun equalsCharTest()
   {
     val canvas = Canvas(2, 2)
-    canvas.setLineChar(1, 1)
+    canvas.setChar(1, 1, LINE_CHAR)
     assertTrue(canvas.equalsChar(Point(1, 1), LINE_CHAR))
   }
 
@@ -170,7 +164,7 @@ class CanvasTest {
       ----------------------
     """.trimIndent(), canvas.toString())
 
-    val bucketFillTest = BucketFillCommand(listOf("10", "3", "o"), canvas)
+    var bucketFillTest = BucketFillCommand(listOf("10", "3", "o"), canvas)
     bucketFillTest.execute()
     assertEquals("""
       ----------------------
@@ -178,6 +172,39 @@ class CanvasTest {
       |xxxxxxooooooooox   x|
       |     xoooooooooxxxxx|
       |     xoooooooooooooo|
+      ----------------------
+    """.trimIndent(), canvas.toString())
+
+    bucketFillTest = BucketFillCommand(listOf("1", "3", "z"), canvas)
+    bucketFillTest.execute()
+    assertEquals("""
+      ----------------------
+      |oooooooooooooooxxxxx|
+      |xxxxxxooooooooox   x|
+      |zzzzzxoooooooooxxxxx|
+      |zzzzzxoooooooooooooo|
+      ----------------------
+    """.trimIndent(), canvas.toString())
+
+    bucketFillTest = BucketFillCommand(listOf("10", "2", " "), canvas)
+    bucketFillTest.execute()
+    assertEquals("""
+      ----------------------
+      |               xxxxx|
+      |xxxxxx         x   x|
+      |zzzzzx         xxxxx|
+      |zzzzzx              |
+      ----------------------
+    """.trimIndent(), canvas.toString())
+
+    bucketFillTest = BucketFillCommand(listOf("18", "1", "a"), canvas)
+    bucketFillTest.execute()
+    assertEquals("""
+      ----------------------
+      |               aaaaa|
+      |xxxxxx         a   a|
+      |zzzzzx         aaaaa|
+      |zzzzzx              |
       ----------------------
     """.trimIndent(), canvas.toString())
   }

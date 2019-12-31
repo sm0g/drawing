@@ -1,17 +1,11 @@
 package com.example.drawing.command
 
 import com.example.drawing.domain.Canvas
-import com.example.drawing.domain.Canvas.Companion.EMPTY_CHAR
-import com.example.drawing.domain.Canvas.Companion.LINE_CHAR
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertThrows
 
 class BucketFillCommandTest {
-  companion object {
-    const val COLOR_CHAR = 'z'
-  }
-
   @Test
   fun emptyArgsTest() {
     assertThrows(IllegalArgumentException::class.java) {
@@ -64,30 +58,6 @@ class BucketFillCommandTest {
   }
 
   @Test
-  fun executeTest() {
-    val canvas = Canvas(5, 3)
-    val rectangleCommand = RectangleCommand(listOf("2", "1", "4", "3"), canvas)
-    rectangleCommand.execute()
-    val bucketFillCommand = BucketFillCommand(listOf("1", "1", "z"), canvas)
-    bucketFillCommand.execute()
-
-    assertEquals(COLOR_CHAR, canvas.getNode(1, 1))
-    assertEquals(LINE_CHAR, canvas.getNode(2, 1))
-    assertEquals(LINE_CHAR, canvas.getNode(3, 1))
-    assertEquals(LINE_CHAR, canvas.getNode(4, 1))
-
-    assertEquals(COLOR_CHAR, canvas.getNode(1, 2))
-    assertEquals(LINE_CHAR, canvas.getNode(2, 2))
-    assertEquals(EMPTY_CHAR, canvas.getNode(3, 2))
-    assertEquals(LINE_CHAR, canvas.getNode(4, 2))
-
-    assertEquals(COLOR_CHAR, canvas.getNode(1, 3))
-    assertEquals(LINE_CHAR, canvas.getNode(2, 3))
-    assertEquals(LINE_CHAR, canvas.getNode(3, 3))
-    assertEquals(LINE_CHAR, canvas.getNode(4, 3))
-  }
-
-  @Test
   fun toStringTest()
   {
     val canvas = Canvas(5, 3)
@@ -99,6 +69,32 @@ class BucketFillCommandTest {
       appendln(" zzzzz ")
       appendln(" zzzzz ")
       appendln(" zzzzz ")
+      append("       ")
+    }, canvas.toString())
+  }
+
+  @Test
+  fun overwriteColorTest() {
+    val canvas = Canvas(5, 3)
+    var bucketFillCommand = BucketFillCommand(listOf("1", "1", "z"), canvas)
+    bucketFillCommand.execute()
+
+    assertEquals(buildString {
+      appendln("       ")
+      appendln(" zzzzz ")
+      appendln(" zzzzz ")
+      appendln(" zzzzz ")
+      append("       ")
+    }, canvas.toString())
+
+    bucketFillCommand = BucketFillCommand(listOf("1", "1", "o"), canvas)
+    bucketFillCommand.execute()
+
+    assertEquals(buildString {
+      appendln("       ")
+      appendln(" ooooo ")
+      appendln(" ooooo ")
+      appendln(" ooooo ")
       append("       ")
     }, canvas.toString())
   }

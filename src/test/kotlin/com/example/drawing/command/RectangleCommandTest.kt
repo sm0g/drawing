@@ -1,8 +1,6 @@
 package com.example.drawing.command
 
 import com.example.drawing.domain.Canvas
-import com.example.drawing.domain.Canvas.Companion.EMPTY_CHAR
-import com.example.drawing.domain.Canvas.Companion.LINE_CHAR
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
@@ -50,25 +48,6 @@ class RectangleCommandTest {
     assertThrows(IllegalArgumentException::class.java) {
       RectangleCommand(listOf("0", "1", "0", "2"), canvas)
     }
-  }
-
-  @Test
-  fun executeTest() {
-    val canvas = Canvas(5, 3)
-    val command = RectangleCommand(listOf("2", "1", "4", "3"), canvas)
-    command.execute()
-
-    assertEquals(LINE_CHAR, canvas.getNode(2, 1))
-    assertEquals(LINE_CHAR, canvas.getNode(3, 1))
-    assertEquals(LINE_CHAR, canvas.getNode(4, 1))
-
-    assertEquals(LINE_CHAR, canvas.getNode(2, 2))
-    assertEquals(EMPTY_CHAR, canvas.getNode(3, 2))
-    assertEquals(LINE_CHAR, canvas.getNode(4, 2))
-
-    assertEquals(LINE_CHAR, canvas.getNode(2, 3))
-    assertEquals(LINE_CHAR, canvas.getNode(3, 3))
-    assertEquals(LINE_CHAR, canvas.getNode(4, 3))
   }
 
   @Test

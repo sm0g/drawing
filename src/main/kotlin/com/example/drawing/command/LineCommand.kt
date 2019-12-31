@@ -6,6 +6,7 @@ import com.example.drawing.domain.Point
 class LineCommand(args: List<String>, private val canvas: Canvas) : Command {
   private val start: Point
   private val end: Point
+  private val color: Char = 'x'
 
   init {
     require(args.isNotEmpty()) { "Command arguments must not be empty" }
@@ -16,6 +17,8 @@ class LineCommand(args: List<String>, private val canvas: Canvas) : Command {
 
     require(canvas.contains(start)) { "Point (x1, y1) is out of canvas" }
     require(canvas.contains(end)) { "Point (x2, y2) is out of canvas" }
+    require(start.x <= end.x) { "x2 must be greater than x1" }
+    require(start.y <= end.y) { "y2 must be greater than y1" }
     require(start.x == end.x || start.y == end.y) { "Inclined lines are not supported" }
   }
 
@@ -30,13 +33,13 @@ class LineCommand(args: List<String>, private val canvas: Canvas) : Command {
 
   private fun drawHorizontalLine() {
     for(y in start.y .. end.y) {
-      canvas.setLineChar(start.x, y)
+      canvas.setChar(start.x, y, color)
     }
   }
 
   private fun drawVerticalLine() {
     for(x in start.x .. end.x) {
-      canvas.setLineChar(x, start.y)
+      canvas.setChar(x, start.y, color)
     }
   }
 }

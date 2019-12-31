@@ -1,7 +1,6 @@
 package com.example.drawing.command
 
 import com.example.drawing.domain.Canvas
-import com.example.drawing.domain.Canvas.Companion.LINE_CHAR
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
@@ -49,16 +48,6 @@ class LineCommandTest {
     assertThrows(IllegalArgumentException::class.java) {
       LineCommand(listOf("1", "1", "2", "2"), canvas)
     }
-  }
-
-  @Test
-  fun executeTest() {
-    val canvas = Canvas(2, 2)
-    val command = LineCommand(listOf("1", "1", "2", "1"), canvas)
-    command.execute()
-
-    assertEquals(LINE_CHAR, canvas.getNode(1, 1))
-    assertEquals(LINE_CHAR, canvas.getNode(2, 1))
   }
 
   @Test
