@@ -28,6 +28,9 @@ class LineCommandTest {
     assertThrows(IllegalArgumentException::class.java) {
       LineCommand(listOf("1", "sf", "2", "2"), Canvas(2, 2))
     }
+    assertThrows(IllegalArgumentException::class.java) {
+      LineCommand(listOf("5", "1", "4", "1"), Canvas(20, 4))
+    }
   }
 
   @Test

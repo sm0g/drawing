@@ -61,21 +61,6 @@ class BucketFillCommandTest {
   fun toStringTest()
   {
     val canvas = Canvas(5, 3)
-    val bucketFillCommand = BucketFillCommand(listOf("1", "1", "z"), canvas)
-    bucketFillCommand.execute()
-
-    assertEquals(buildString {
-      appendln("       ")
-      appendln(" zzzzz ")
-      appendln(" zzzzz ")
-      appendln(" zzzzz ")
-      append("       ")
-    }, canvas.toString())
-  }
-
-  @Test
-  fun overwriteColorTest() {
-    val canvas = Canvas(5, 3)
     var bucketFillCommand = BucketFillCommand(listOf("1", "1", "z"), canvas)
     bucketFillCommand.execute()
 
