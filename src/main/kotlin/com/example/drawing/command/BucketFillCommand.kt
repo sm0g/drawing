@@ -1,6 +1,7 @@
 package com.example.drawing.command
 
 import com.example.drawing.domain.Canvas
+import com.example.drawing.domain.CanvasChar.Companion.EMPTY_CHAR
 import com.example.drawing.domain.Point
 import java.util.*
 import kotlin.collections.HashSet
@@ -16,9 +17,10 @@ class BucketFillCommand(args: List<String>, private val canvas: Canvas) : Comman
     eyeDrop = Point(args[0], args[1])
 
     require(canvas.contains(eyeDrop)) { "Point (x1, y1) is out of canvas" }
-    require(args[2].length == 1) { "Invalid color symbol" }
 
-    color = args[2].toCharArray().first()
+    color = if(args[2] == "")
+      EMPTY_CHAR
+    else args[2].toCharArray().first()
   }
 
   override fun execute() {
